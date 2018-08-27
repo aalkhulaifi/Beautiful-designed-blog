@@ -1,0 +1,34 @@
+{% include 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form|crispy}} 
+  <input type="submit" value="Create" class="btn btn-outline-success">
+</form>
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+       {% for article in articles %}
+
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <a href="{% url 'detail' %}">
+              <h2 class="post-title">
+                {{article.title}}
+              </h2>
+              <h3 class="post-subtitle">
+                {{article.content}}
+              </h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="{% url 'detail' %}">{{article.author}}</a>
+              {{article.publish_date|timesince}}
+              {{article.created|timesince}}</p>
+           {% endfor %}
+
+          </div>
+
+    <hr>
+{% endblock content %}
