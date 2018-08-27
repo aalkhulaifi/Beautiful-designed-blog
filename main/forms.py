@@ -2,11 +2,11 @@ from django import forms
 from .models import Article, Reply
 from django.contrib.auth.models import User
 
-class SigninForm(forms.Form):
+class UserLoginForm(forms.Form):
 	username = forms.CharField(required=True)
 	password = forms.CharField(required=True, widget=forms.PasswordInput())
 
-class UserRegisterForm(forms.ModelForm):
+class UserSignupForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'first_name', 'last_name', 'password']

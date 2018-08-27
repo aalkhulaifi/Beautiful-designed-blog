@@ -5,34 +5,54 @@
 
 {% block content %}
 	<br>
-	<form action="{% url 'list' %}" method="GET">
-		<div class="input-group mb-3">
-		  <input type="text" class="form-control" placeholder="Search for article..." aria-label="Search" name="q">
-		  <div class="input-group-append">
-		    <input type="submit" class="input-group-text" value="Search" >
-		  </div>
-		</div>
-	</form>
 	<div class="row">
-		{% for article in articles %}
-			<div class="col-sm-6">
+          <div class="col-lg-8 col-md-10 mx-auto">
 				<div class="card">
-					{% if article.image %}
-						<img class="card-img-top" src="{{article.image.url}}" alt="Card image cap">		
+					{% if instance.image %}
+						<img class="card-img-top" src="{{instance.image.url}}" alt="Card image cap">		
 					{% endif %}
 				  <div class="card-body">
-				    <h5 class="card-title">{{article.title}}</h5>
-				    <h6 class="card-subtitle mb-2 text-muted"> Posted by{{article.author}}</h6>
-				    <p class="card-text">{{article.content}}</p>
-				    <p class="card-text">{{article.created|timesince}}</p>
-				    <p class="card-text">{{article.publish_date|timesince}}</p>
+				    <h5 class="card-title">{{instance.title}}</h5>
+				    <h6 class="card-subtitle mb-2 text-muted"> Posted by {{instance.author}}</h6>
+				    <p class="card-text">{{instance.content}}</p>
+				    <p class="card-text">{{instance.created|timesince}}</p>
+				    <p class="card-text">{{instance.publish_date|timesince}}</p>
 				    
-				    <a href="{% url 'update' %}" class="btn btn-outline-info">Update</a>
-				    <a href="{% url 'delete' %}" class="btn btn-outline-danger">Delete</a>
+				     <button class="btn" onclick="like_button()">
+						<div id="like-count">{{count}}</div>
+						<i id="like-heart" class="fa fa-star {% if liked %}text-warning{% endif %}" aria-hidden="true"></i>
+					</button>
+					 <p class="card-text">
+			  	{% for reply in replys %}
+			  		<div class="alert alert-primary">({{reply.timestamp|timesince}}){{reply.user}}: {{reply.reply|linebreaks}}</div>
+			  	{% endfor %}
+			  </p>
+				    <a href="{% url 'update' article_id=instance.id %}" class="btn btn-outline-info">Update</a>
+				    <a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
 				  </div>
 				</div>
 			</div>
-		{% endfor %}
 	</div>
-
+<script>
+	function like_button(){
+		$.ajax({
+			type:"GET",
+			url:"{% url 'likes' article_id=instance.id %}",
+			error: function(){
+				alert("Something went wrong!")
+			},
+			success: function(data){
+				$("#like-count").text(data.count);
+				if(data.action==="like")
+				{
+					$("#like-heart").addClass("text-warning");
+				}
+				else
+				{
+					$("#like-heart").removeClass("text-warning");
+				}
+			},
+		});
+	}
+</script>
 {% endblock content %}

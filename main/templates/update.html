@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<form action="{% url 'update' article_id=article.id %}" method="POST">
+<form action="{% url 'update' article_id=instance.id %}" method="POST">
 	{% csrf_token %}
 	{{form|crispy}}	
 	<input type="submit" value="Update" class="btn btn-outline-success">
