@@ -5,7 +5,7 @@ from .forms import ArticleForm, UserSignupForm, UserLoginForm, ReplyForm
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
-
+# edit search bar
 def home(request):
 	object_list = Article.objects.all().order_by('-publish_date')
 	query = request.GET.get('search')
@@ -94,7 +94,7 @@ def update(request,article_id):
 	}
 	return render(request, 'update.html', context)
 
-
+# edit reply and likes
 def detail(request, article_id):
 	instance = Article.objects.get(id=article_id)
 	form = ArticleForm()

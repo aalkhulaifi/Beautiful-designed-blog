@@ -2,7 +2,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="#">Beauitful Blog</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Beauitful Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -15,19 +15,30 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
+            
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </li>
+                  {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'signin' %}">Signin</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-            </li>
+                  {% endif %}
+
           </ul>
         </div>
       </div>
     </nav>
+  {% if request.get_full_path != "/main/detail/2/" %}
         <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
@@ -42,3 +53,4 @@
         </div>
       </div>
     </header>
+  {% endif %}

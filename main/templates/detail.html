@@ -1,58 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}
-{% endblock title %}
-
 {% block content %}
-	<br>
-	<div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-				<div class="card">
-					{% if instance.image %}
-						<img class="card-img-top" src="{{instance.image.url}}" alt="Card image cap">		
-					{% endif %}
-				  <div class="card-body">
-				    <h5 class="card-title">{{instance.title}}</h5>
-				    <h6 class="card-subtitle mb-2 text-muted"> Posted by {{instance.author}}</h6>
-				    <p class="card-text">{{instance.content}}</p>
-				    <p class="card-text">{{instance.created|timesince}}</p>
-				    <p class="card-text">{{instance.publish_date|timesince}}</p>
-				    
-				     <button class="btn" onclick="like_button()">
-						<div id="like-count">{{count}}</div>
-						<i id="like-heart" class="fa fa-star {% if liked %}text-warning{% endif %}" aria-hidden="true"></i>
-					</button>
-					 <p class="card-text">
-			  	{% for reply in replys %}
-			  		<div class="alert alert-primary">({{reply.timestamp|timesince}}){{reply.user}}: {{reply.reply|linebreaks}}</div>
-			  	{% endfor %}
-			  </p>
-				    <a href="{% url 'update' article_id=instance.id %}" class="btn btn-outline-info">Update</a>
-				    <a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
-				  </div>
+   	{% if instance.image %}
+			<header class="masthead">	
+				<div class="overlay">
+					<img src="{{instance.image.url}}" alt="Card image cap" height="700" width="1140" />
 				</div>
-			</div>
-	</div>
-<script>
-	function like_button(){
-		$.ajax({
-			type:"GET",
-			url:"{% url 'likes' article_id=instance.id %}",
-			error: function(){
-				alert("Something went wrong!")
-			},
-			success: function(data){
-				$("#like-count").text(data.count);
-				if(data.action==="like")
-				{
-					$("#like-heart").addClass("text-warning");
-				}
-				else
-				{
-					$("#like-heart").removeClass("text-warning");
-				}
-			},
-		});
-	}
-</script>
+				      <div class="container">
+				        <div class="row">
+				          <div class="col-lg-8 col-md-10 mx-auto">
+				            <div class="post-heading">
+				              <h1>{{instance.title}}</h1>
+				              <h2 class="subheading">{{instance.sub_heading}}</h2>
+				              <span class="meta">Posted by
+				                <a href="#">{{instancs.author}}</a>
+				                on {{instance.created}}</span>
+				            </div>
+				          </div>
+				        </div>
+      					</div>
+      			</header>
+
+		{% endif %}
+
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p>{{instance.content}}</p>
+          </div>
+        </div>
+      </div>
+      <!--     <a href="{% url 'update' article_id=instance.id %}" class="btn btn-outline-info">Update</a>
+				    <a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
+	-->
+    </article>
+    </div>
 {% endblock content %}
