@@ -105,9 +105,9 @@ def detail(request, article_id):
 	article_like_count = Like.objects.filter(article=instance).count()
 
 	if request.method=="POST":
-		form = ReplyForm(request.POST)
-		if form.is_valid():
-			reply = form.save(commit=False)
+		form1 = ReplyForm(request.POST)
+		if form1.is_valid():
+			reply = form1.save(commit=False)
 			reply.article=instance
 			reply.user=request.user
 			reply.save()
@@ -117,7 +117,7 @@ def detail(request, article_id):
 
 	context = {
 	"replys":replys,
-	"form":form,
+	"form1":form1,
 	"instance": instance,
 	"liked":liked,
 	"count":article_like_count

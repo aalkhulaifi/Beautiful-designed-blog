@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
    	{% if instance.image %}
@@ -23,7 +24,6 @@
 
 		{% endif %}
 
-
     <!-- Post Content -->
 <div>
     <article>
@@ -41,5 +41,18 @@
       {% endif %}
 
     </article>
+</div>
+<div>
+  <p class="card-text">
+			  	{% for reply in replys %}
+			  		<div class="alert alert-primary">({{reply.timestamp|timesince}}){{reply.request.user}}: {{reply.reply|linebreaks}}</div>
+			  	{% endfor %}
+			  </p>
+			  <p class="card-text">
+			  	<form action="{% url 'detail' article_id=reply.id %}" method="POST">
+			  		{% csrf_token %}
+			  		{{form1|crispy}}
+			  		<input type="submit" class="btn btn-outline-primary" value="Submit">
+			  	</form>
 </div>
 {% endblock content %}
