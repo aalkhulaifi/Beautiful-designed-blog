@@ -34,26 +34,33 @@
   <div>
   <form action="{% url 'home' %}" method="GET">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Search for article..." aria-label="Search" name="q">
+          <input type="text" name="search" placeholder="Search for Articles..." class="form-control" value="{{request.GET.search}}">
+
       <div class="input-group-append">
         <input type="submit" class="btn btn-outline-primary" value="Search" >
       </div>
     </div>
   </form>
   </div>
+            {% if request.user.is_authenticated %}
+
   <form action="{% url 'create' %}" class="text-right" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form|crispy}} 
     <input type="submit" value="Create" class="btn btn-outline-success">
   </form>
 </div>
+            {% endif %}
     <!-- Main Content -->
+      {% for object in object_list %}
+
     <div class="container">
+
       <div class="row">
 
-        {% for object in object_list %}
 
         <div class="col-lg-8 col-md-10 mx-auto">
+
           <div class="post-preview">
             <a href="{% url 'detail' article_id=object.id %}">
               <h2 class="post-title">

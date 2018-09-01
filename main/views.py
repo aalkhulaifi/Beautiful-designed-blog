@@ -3,9 +3,9 @@ from django.http import JsonResponse, Http404, HttpResponse
 from .models import Article, Reply, Like
 from .forms import ArticleForm, UserSignupForm, UserLoginForm, ReplyForm
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 
 # Create your views here.
-# edit search bar
 def home(request):
 	object_list = Article.objects.all().order_by('-publish_date')
 	query = request.GET.get('search')
@@ -14,7 +14,6 @@ def home(request):
 			Q(title__icontains=query)|
 			Q(content__icontains=query)|
 			Q(created__icontains=query)|
-			Q(author__icontains=query)|
 			Q(publish_date__icontains=query)
 			).distinct()
 	context = {
