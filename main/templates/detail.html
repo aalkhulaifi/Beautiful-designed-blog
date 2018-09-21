@@ -21,9 +21,11 @@
 				        </div>
       					</div>
       			</header>
-
 		{% endif %}
-
+ <button class="btn" onclick="like_button()">
+						<div id="like-count">{{count}}</div>
+						<i id="like-heart" class="fa fa-star {% if liked %}text-warning{% endif %}" aria-hidden="true"></i>
+					</button>
     <!-- Post Content -->
 <div>
     <article>
@@ -55,4 +57,27 @@
 			  		<input type="submit" class="btn btn-outline-primary" value="Submit">
 			  	</form>
 </div>
+
+<script>
+	function like_button(){
+		$.ajax({
+			type:"GET",
+			url:"{% url 'likes' article_id=instance.id %}",
+			error: function(){
+				alert("Something went wrong!")
+			},
+			success: function(data){
+				$("#like-count").text(data.count);
+				if(data.action==="like")
+				{
+					$("#like-heart").addClass("text-warning");
+				}
+				else
+				{
+					$("#like-heart").removeClass("text-warning");
+				}
+			},
+		});
+	}
+</script>
 {% endblock content %}

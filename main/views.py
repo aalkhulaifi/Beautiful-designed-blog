@@ -55,7 +55,7 @@ def register(request):
 			person.save()
 
 			login(request, person)
-			return redirect('signin')
+			return redirect('home')
 
 	print(form.errors)
 	context = {
@@ -125,7 +125,7 @@ def detail(request, article_id):
 	return render(request, 'detail.html', context)
 
 def likes(request, article_id):
-	article = article.objects.get(id=article_id)
+	article = Article.objects.get(id=article_id)
 
 	impressed, created = Like.objects.get_or_create(user=request.user, article=article)
 	if created:
