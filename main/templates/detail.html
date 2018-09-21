@@ -21,6 +21,7 @@
 				        </div>
       					</div>
       			</header>
+  
 		{% endif %}
  <button class="btn" onclick="like_button()">
 						<div id="like-count">{{count}}</div>
@@ -36,10 +37,10 @@
           </div>
         </div>
       </div>
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated == is_currentuser %}
 
          <a href="{% url 'update' article_id=instance.id %}" class="btn btn-outline-info">Update</a>
-				    <a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
+		<a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
       {% endif %}
 
     </article>

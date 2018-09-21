@@ -9,7 +9,7 @@ class Article(models.Model):
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
 	sub_heading = models.CharField(max_length=200)
 	publish_date = models.DateField(auto_now=True)
-
+	is_currentuser = models.BooleanField(default=False)
 	def __str__(self):
 		return self.title
 
