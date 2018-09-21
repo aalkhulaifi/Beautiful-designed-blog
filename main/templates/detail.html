@@ -49,9 +49,9 @@
 			  	{% endfor %}
 			  </p>
 			  <p class="card-text">
-			  	<form action="{% url 'detail' article_id=reply.id %}" method="POST">
+			  	<form action="{% url 'detail' article_id=instance.id %}" method="POST">
 			  		{% csrf_token %}
-			  		{{form1|crispy}}
+			  		{{form|crispy}}
 			  		<input type="submit" class="btn btn-outline-primary" value="Submit">
 			  	</form>
 </div>

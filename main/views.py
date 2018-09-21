@@ -96,7 +96,7 @@ def update(request,article_id):
 # edit reply and likes
 def detail(request, article_id):
 	instance = Article.objects.get(id=article_id)
-	form = ArticleForm()
+	form = ReplyForm()
 
 	liked = False
 	if request.user.is_authenticated:
@@ -105,19 +105,19 @@ def detail(request, article_id):
 	article_like_count = Like.objects.filter(article=instance).count()
 
 	if request.method=="POST":
-		form1 = ReplyForm(request.POST)
-		if form1.is_valid():
-			reply = form1.save(commit=False)
+		form = ReplyForm(request.POST)
+		if form.is_valid():
+			reply = form.save(commit=False)
 			reply.article=instance
 			reply.user=request.user
 			reply.save()
-			return redirect("detail", id=instance.id)
+			return redirect("detail", article_id=instance.id)
 
 	replys = Reply.objects.filter(article=instance).order_by("-timestamp")
 
 	context = {
 	"replys":replys,
-	"form1":form1,
+	"form":form,
 	"instance": instance,
 	"liked":liked,
 	"count":article_like_count
