@@ -2,31 +2,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-   	{% if instance.image %}
-			<header class="masthead" >	
-				<div class="overlay" >
-					<img src="{{instance.image.url}}" alt="Card image cap" height="570" width="1140" />
-				</div>
-				      <div class="container">
-				        <div class="row">
-				          <div class="col-lg-8 col-md-10 mx-auto">
-				            <div class="post-heading">
-				              <h1>{{instance.title}}</h1>
-				              <h2 class="subheading">{{instance.sub_heading}}</h2>
-				              <span class="meta">Posted by
-				                <a href="#">{{instancs.author}}</a>
-				                on {{instance.created}}</span>
-				            </div>
-				          </div>
-				        </div>
-      					</div>
-      			</header>
-  
-		{% endif %}
- <button class="btn" onclick="like_button()">
-						<div id="like-count">{{count}}</div>
-						<i id="like-heart" class="fa fa-star {% if liked %}text-warning{% endif %}" aria-hidden="true"></i>
-					</button>
     <!-- Post Content -->
 <div>
     <article>
@@ -42,7 +17,12 @@
          <a href="{% url 'update' article_id=instance.id %}" class="btn btn-outline-info">Update</a>
 		<a href="{% url 'delete' article_id=instance.id %}" class="btn btn-outline-danger">Delete</a>
       {% endif %}
-
+<div class="text-left">
+ <button class="btn" onclick="like_button()">
+	<div id="like-count">{{count}}</div>
+	<i id="like-heart" class="fa fa-star {% if liked %}text-warning{% endif %}" aria-hidden="true"></i>
+</button>
+</div>
     </article>
 </div>
 <div>

@@ -39,11 +39,49 @@
       </div>
     </nav>
 
-  {% if request.get_full_path == "/main/detail/" %}
- 
-{% else %}
-        <!-- Page Header -->
+  {% if request.get_full_path != "/main/home/" %}
+        {% if instance.image %}
+
+      <header class="masthead" >  
+        <div class="overlay" >
+          <img src="{{instance.image.url}}" alt="Card image cap" height="570" width="1140" />
+        </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                      <h1>{{instance.title}}</h1>
+                      <h2 class="subheading">{{instance.sub_heading}}</h2>
+                      <span class="meta">Posted by
+                        <a href="#">{{instancs.author}}</a>
+                        on {{instance.created}}</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </header>
+        {% else %}
+
+  {% endif %}
+  {% elif request.get_full_path != "/main/contact/"%}
+
+       <!-- Page Header -->
     <header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>A Beauiful Blog</h1>
+              <span class="subheading">A simple list of Articles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  {% elif request.get_full_path == "/main/about/" %}
+        <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
