@@ -60,10 +60,23 @@
                 </div>
                 </div>
             </header>
-        {% else %}
 
+  {% else %}
+      <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>A Beauiful Blog</h1>
+              <span class="subheading">A simple list of Articles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   {% endif %}
-  {% elif request.get_full_path != "/main/contact/"%}
+  {% elif request.path != "/main/contact/"%}
 
        <!-- Page Header -->
     <header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
@@ -79,7 +92,7 @@
         </div>
       </div>
     </header>
-  {% elif request.get_full_path == "/main/about/" %}
+  {% elif request.path != "/main/about/" %}
         <!-- Page Header -->
     <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
       <div class="overlay"></div>
