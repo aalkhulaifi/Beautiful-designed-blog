@@ -61,8 +61,36 @@
                 </div>
             </header>
 
-  {% else %}
+  {% elif request.path == "/main/contact/" %}
       <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>A Beauiful Blog</h1>
+              <span class="subheading">A simple list of Articles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  {% elif request.path == "/main/about/" %}
+     <header class="masthead" style="background-image: url('/static/img/about-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>A Beauiful Blog</h1>
+              <span class="subheading">A simple list of Articles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  {% else %}
+    <header class="masthead" style="background-image: url('/static/img/post-sample-image.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -80,21 +108,6 @@
 
        <!-- Page Header -->
     <header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              <h1>A Beauiful Blog</h1>
-              <span class="subheading">A simple list of Articles</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  {% elif request.path != "/main/about/" %}
-        <!-- Page Header -->
-    <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
