@@ -29,7 +29,17 @@
 {% include 'navbar.html' %}
   <body>
 
-   
+<style type="text/css">
+  .btn-circle {
+  width: 78px;
+  height: 65px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50px;
+}
+</style> 
 <div class="container">
   <div>
   <form action="{% url 'home' %}" method="GET">
@@ -47,7 +57,7 @@
   <form action="{% url 'create' %}" class="text-right" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form|crispy}} 
-    <input type="submit" value="Create" class="btn btn-outline-success">
+    <input type="submit" value="Create+" class="btn btn-info btn-circle btn-lg">
   </form>
 </div>
             {% endif %}
